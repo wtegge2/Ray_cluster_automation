@@ -9,10 +9,10 @@ This repo contains a script that launches a Ray cluster automatically. Details o
 ## IMPORTANT
 This script uses the folder and files found in this repository: https://github.com/TingkaiLiu/Ray-SLURM-autoscaler
 
-You can download the files by running:
+You do not need to download these files yourself, as this script will do it for you.
+
+If you want these files separately, You can download the files by running:
 ```
 git clone https://github.com/TingkaiLiu/Ray-SLURM-autoscaler.git
 ```
-
-Make sure you clone both of these repos into the same directory in order for the auto_script.py to work correctly.
 

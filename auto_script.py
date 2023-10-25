@@ -133,11 +133,11 @@ if __name__ == "__main__":
         print("Ray path is not vaild. Please fill the fields in deploy.py correctly")
         exit(0)
 
-    if os.path.exists(RAY_SLURM_PATH):
-        ans = input("Ray-SLURM packages already exist. Overwrite? [y/n]: ")
-        if ans != 'y':
-            print("Exited")
-            exit(0)
+    #if os.path.exists(RAY_SLURM_PATH):
+    #    ans = input("Ray-SLURM packages already exist. Overwrite? [y/n]: ")
+    #    if ans != 'y':
+    #        print("Exited")
+    #        exit(0)
 
     os.makedirs(RAY_SLURM_PATH, exist_ok=True)
     os.makedirs(TEMPLATE_PATH, exist_ok=True)
