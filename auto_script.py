@@ -40,7 +40,8 @@ WORKER_NODE_GPUS_arg = args.WORKER_NODE_GPUS
 # for yaml file
 yaml_environment = "        - conda activate " + user_environment_name + "\n"
 yaml_reservation_line = "        # - \"#SBATCH --reservation=username\" \n"
-new_under_slurm_line = "      under_slurm: 0 # doesn't matter. Worker node has to under slurm \n"
+new_head_under_slurm_line = "      under_slurm: 0 \n"
+new_worker_under_slurm_line = "      under_slurm: 1 \n"
 yaml_head_ip_line = "      # head_ip: \"192.168.20.203\" \n"
 
 
@@ -221,7 +222,7 @@ output_file_1 = """#!/bin/bash -l
 #SBATCH --gres=gpu:[_DEPLOY_HEAD_GPUS_]
 
 #SBATCH --nodes=1
-#SBATCH --exclusive
+
 #SBATCH --tasks-per-node=1
 #SBATCH --time=[_DEPLOY_SLURM_JOB_TIME_]
 
@@ -276,7 +277,7 @@ output_file_1 = """#!/bin/bash -l
 #SBATCH --gres=gpu:[_DEPLOY_WORKER_GPUS_]
 
 #SBATCH --nodes=1
-#SBATCH --exclusive
+
 #SBATCH --tasks-per-node=1
 #SBATCH --time=[_DEPLOY_SLURM_JOB_TIME_]
 
@@ -318,11 +319,11 @@ file = open(filename)
 content = file.readlines()      # put all the lines of the file into an array 
 
 
-content[36] = new_under_slurm_line
+content[36] = new_head_under_slurm_line
 content[42] = yaml_environment
 content[44] = yaml_reservation_line
 
-content[57] = new_under_slurm_line
+content[57] = new_worker_under_slurm_line
 content[59] = yaml_environment
 content[61] = yaml_reservation_line
 
@@ -337,11 +338,6 @@ with open("ray-slurm.yaml", "w") as output:
         i = i + 1
 
 os.system("ray up ray-slurm.yaml --no-config-cache --yes")
-
-
-
-
-
 
 
 
